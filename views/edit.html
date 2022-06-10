@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>学生信息管理</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/public/css/main.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+            <li ><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="/students">学生信息</a></li>
+            <li><a href="/students/new">添加学生信息</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">修改学生信息</h1>
+          <!-- <a class="btn btn-success" href="">添加学生</a> -->
+	          <form action="/students/edit" method="post">
+              <!-- 用来放一些不希望被用户看见，但是需要被提交到服务端的数据 -->
+         <input type="hidden" value="{{ student._id }}" name="id">
+  <div class="form-group">
+    <label for="exampleInputEmail1">姓名</label>
+    <input type="text" class="form-control" value="{{student.name}}" name="name" placeholder="请输入姓名">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">性别</label>
+	<div>
+		<label class="radio-inline">
+	  		<input type="radio" name="gender" id="sex_1" value="0"> 男
+		</label>
+		<label class="radio-inline">
+	  		<input type="radio" name="gender" id="sex_2" value="1"> 女
+		</label>
+	</div>
+  </div>
+  <div class="form-group">
+    <label for="">年龄</label>
+    <input type="number" value="{{student.age}}"  class="form-control" id="" name="age">
+  </div>
+  <div class="form-group">
+    <label for="">爱好</label>
+    <input type="text" value="{{student.hobbies}}"  class="form-control" name="hobbies">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+window.onload = ()=>{
+    var sexId = "{{student.gender}}"
+
+  if (sexId == 0) {
+    let sex_1 = document.getElementById('sex_1')
+    return sex_1.checked = 'checked'
+  }else{
+  let sex_2 = document.getElementById('sex_2')
+   return sex_2.checked = 'checked'
+  }
+}
+</script>
